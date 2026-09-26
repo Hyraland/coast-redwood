@@ -81,7 +81,7 @@
       <span><em>Sequoia sempervirens</em></span>
       <span id="rd-dist">0.000 / 0.000 km</span>
       <span id="rd-elev">elev 0 m</span>
-      <span id="rd-sun">sun alt 32&deg;</span>
+      <span id="rd-sun">night &middot; moonlit</span>
     </p>
   </div>
   <div class="controls" role="group" aria-label="Playback">
@@ -89,8 +89,8 @@
     <button id="btn-s1" type="button" aria-pressed="true">1&times;</button>
     <button id="btn-s2" type="button" aria-pressed="false">2&times;</button>
     <button id="btn-s4" type="button" aria-pressed="false">4&times;</button>
-    <label class="slider" for="time-of-day"><span>Time</span><input id="time-of-day" type="range" min="0" max="1439" step="1" value="490"><output id="time-out" for="time-of-day">08:10</output></label>
-    <label class="slider" for="fog-level"><span>Fog</span><input id="fog-level" type="range" min="0" max="100" step="1" value="100"><output id="fog-out" for="fog-level">100%</output></label>
+    <label class="slider" for="time-of-day"><span>Time</span><input id="time-of-day" type="range" min="0" max="1439" step="1" value="171"><output id="time-out" for="time-of-day">02:51</output></label>
+    <label class="slider" for="fog-level"><span>Fog</span><input id="fog-level" type="range" min="0" max="100" step="1" value="21"><output id="fog-out" for="fog-level">21%</output></label>
     <button id="btn-sound" type="button" aria-pressed="false">Sound off</button>
     <button id="btn-cat" type="button" aria-pressed="false" aria-label="Black cat companion">Cat</button>
     <button id="btn-jay" type="button" aria-pressed="false" aria-label="Steller's jay companion">Jay</button>
@@ -2193,7 +2193,7 @@ function sampleKeys(keys, e) {
   for (const k in a) out[k] = Array.isArray(a[k]) ? new THREE.Color(lerp(a[k][0], b[k][0], t), lerp(a[k][1], b[k][1], t), lerp(a[k][2], b[k][2], t)) : lerp(a[k], b[k], t);
   return out;
 }
-let timeExp = 1, glareStrength = 0, lastTimeMinutes = 490;
+let timeExp = 1, glareStrength = 0, lastTimeMinutes = 171;
 function applyTime(minutes) {
   lastTimeMinutes = minutes;
   const h = minutes / 60;
@@ -2312,10 +2312,10 @@ setTimeout(() => {
   if (q.has('d')) dist = (+q.get('d') % LOOP_LEN + LOOP_LEN) % LOOP_LEN;
   if (q.has('paused')) setPlaying(false);
   if (q.has('vg')) { compPass.uniforms.uVolGain.value = brightPass.uniforms.uVolGain.value = +q.get('vg'); }
-  let savedFog = 100;
+  let savedFog = 21;                  // default fog 21%
   try { const v = localStorage.getItem('redwood-fog'); if (v !== null && !isNaN(+v)) savedFog = +v; } catch (e) { /* storage unavailable */ }
   setFog(q.has('fog') ? +q.get('fog') : savedFog);
-  let savedTime = 490;
+  let savedTime = 171;                // default time 02:51
   try { const v = localStorage.getItem('redwood-time'); if (v !== null && !isNaN(+v)) savedTime = +v; } catch (e) { /* storage unavailable */ }
   applyTime(q.has('time') ? clamp(Math.round(+q.get('time') * 60), 0, 1439) : savedTime);
   if (q.has('ex')) compPass.uniforms.uExposure.value = +q.get('ex');
