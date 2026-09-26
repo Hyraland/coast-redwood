@@ -1,0 +1,6 @@
+cat.glb / cat-model.js
+  Low-poly animated cat from "Animal Pack Vol.2" by Quaternius (quaternius.com)
+  License: CC0 1.0 Universal (public domain) — no attribution required.
+  Source: https://opengameart.org/content/animated-animales-low-poly
+  Converted from Cat.blend to GLB with Blender 5.2 (animations: Idle, Walking).
+  The page recolours it black and adds glowing eyes at runtime.
